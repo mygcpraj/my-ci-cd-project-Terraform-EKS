@@ -27,3 +27,40 @@ sudo systemctl enable jenkins
 sudo ufw allow 8080
 
 sudo ufw reload
+
+# then install git
+sudo apt install git -y
+
+# add HashiCorp’s official GPG key
+
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+# Add the HashiCorp repository 
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+# Update your APT package 
+
+sudo apt update -y 
+
+# Install Terraform using apt
+
+sudo apt install terraform -y
+
+#finally install kubectl
+
+sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
+
+sudo chmod +x ./kubectl
+
+sudo mkdir -p $HOME/bin
+sudo cp ./kubectl $HOME/bin/kubectl
+
+# Add $HOME/bin to your PATH permanently
+
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+
+source ~/.bashrc
+
+kubectl version --client
+
