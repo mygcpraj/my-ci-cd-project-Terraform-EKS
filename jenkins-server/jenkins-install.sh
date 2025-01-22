@@ -20,7 +20,7 @@ sudo apt-get update
 # Install Jenkins 
 sudo apt-get install jenkins -y
 
-sudo systecmctl start jenkins.service
+sudo systemctl start jenkins.service
 
 sudo systemctl enable jenkins
 
